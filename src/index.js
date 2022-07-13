@@ -1,4 +1,4 @@
-import { timeConversion } from './convert';
+import { tempConversion } from './convert';
 import { getWeather } from './api'
 
 const form = document.getElementById('location');
@@ -8,9 +8,8 @@ const form = document.getElementById('location');
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   getWeather()
-  console.log(timeConversion(1657659600, -21600).getDay());
-  console.log(timeConversion(1657659600, -21600).getHour());
-  console.log(timeConversion(1657659600, -21600).getHourAndMinute());
+  console.log(tempConversion.toCelcius(301.32));
+  console.log(tempConversion.toFahrenheit(301.32));
 });
 
 // https://openweathermap.org/current#current_JSON

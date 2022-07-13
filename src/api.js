@@ -1,4 +1,4 @@
-import { weather } from './weather';
+import { weather } from './weather'
 
 // Wait for getWeather() and then find forecast data at location. Convert required data into objects.
 async function getForecast(lat, lon) {
@@ -17,10 +17,11 @@ async function getWeather() {
     { mode: 'cors' },
   );
   const weatherData = await data.json();
+  console.log(weatherData);
   getForecast( // After retrieving locational data, find the forecasted weather at said location.
     weather.getCurrentWeather(weatherData).location.lat,
     weather.getCurrentWeather(weatherData).location.lon,
   );
 }
 
-export { getForecast, getWeather} 
+export { getForecast, getWeather } 

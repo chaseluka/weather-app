@@ -1,7 +1,7 @@
 
 
 // Pass in openweathermap data and create an object for the specified location obtaining desired data for the current weather, the daily weather forecast, and the weekly weather forcast.
-/* const weather = (() => {
+const weather = (() => {
   const currentWeather = (
     temp,
     feelsLike,
@@ -82,4 +82,5 @@
   return { getCurrentWeather, getHourlyForecast, getWeeklyForecast };
 })();
 
-export default weather */
+// eslint-disable-next-line import/prefer-default-export
+export { weather }
