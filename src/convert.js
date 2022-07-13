@@ -3,7 +3,6 @@ import { fromUnixTime } from 'date-fns';
 // Convert time from UTC to Hour, Hour and Minute, and Day.
 const timeConversion = (dt, tz) => {
   const date = fromUnixTime(dt + tz).toUTCString();
-  console.log(date);
   
   const getHour = () => {
     let hour = parseInt(date.slice(17, 20), 10);
@@ -15,7 +14,7 @@ const timeConversion = (dt, tz) => {
     }
     return { hour }
   }
-  
+
   const getHourAndMinute = () => {
     const minute = date.slice(20, 22)
     const hourAndMinute = `${getHour().hour  }:${  minute}`;
@@ -27,7 +26,17 @@ const timeConversion = (dt, tz) => {
     const day = date.slice(0, 3)
     return { day}
   }
-  return { getHour, getHourAndMinute, getDay}
+
+  const timeIsAMOrPM = () => {
+    let period = '';
+    const hour = parseInt(date.slice(17, 20), 10)
+
+    if (hour > 11 && hour < 23){
+      period = 'PM'
+    } else period = 'AM'
+    return { period }
+  }
+  return { getHour, getHourAndMinute, getDay, timeIsAMOrPM}
 }
 
 // Convert from Kelvins to either Celcius or Fahrenheit
@@ -47,7 +56,7 @@ const tempConversion = (() => {
 // Convert wind speed to mph and convert direction to cardinal direction.
 const windConversion = (() => {
   const speed = (windSpeed) => {
-    const mph = windSpeed * 2.236936;
+    const mph = Math.round(windSpeed * 2.236936);
     return { mph }
   }
 
