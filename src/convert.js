@@ -12,29 +12,29 @@ const timeConversion = (dt, tz) => {
     } else if (hour === 0) {
       hour = 12;
     }
-    return { hour }
+    return hour
   }
 
   const getHourAndMinute = () => {
     const minute = date.slice(20, 22)
     const hourAndMinute = `${getHour().hour  }:${  minute}`;
 
-    return { hourAndMinute }
+    return hourAndMinute
   }
 
   const getDay = () => {
     const day = date.slice(0, 3)
-    return { day}
+    return day
   }
 
   const timeIsAMOrPM = () => {
     let period = '';
     const hour = parseInt(date.slice(17, 20), 10)
 
-    if (hour > 11 && hour < 23){
+    if (hour > 11 && hour <= 23){
       period = 'PM'
     } else period = 'AM'
-    return { period }
+    return period
   }
   return { getHour, getHourAndMinute, getDay, timeIsAMOrPM}
 }

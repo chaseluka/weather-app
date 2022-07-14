@@ -1,4 +1,4 @@
-import { mainWeather } from './dom'
+import { mainWeather, displayHourlyForecast } from './dom';
 // Pass in openweathermap data and create an object for the specified location obtaining desired data for the current weather, the daily weather forecast, and the weekly weather forcast.
 const weather = (() => {
   const currentWeather = (
@@ -50,24 +50,26 @@ const weather = (() => {
       weatherData.main.temp_max,
       weatherData.main.temp_min,
     );
+    console.log(location.weatherType);
     mainWeather(location).loadPage();
     return { location };
   };
 
-  const hourlyForecast = (dt, temp, weatherType) => ({ dt, temp, weatherType });
+  const hourlyForecast = (dt, tz, temp, weatherType) => ({ dt, tz, temp, weatherType });
 
   const getHourlyForecast = (forecastData) => {
     const forecast24Hours = [];
     for (let i = 0; i < 25; i += 1) {
       const hour = hourlyForecast(
         forecastData.hourly[i].dt,
+        forecastData.timezone_offset,
         forecastData.hourly[i].temp,
         forecastData.hourly[i].weather[0].description,
       );
       forecast24Hours.push(hour);
-      // time(hour.dt, forecastData.timezone_offset);
     }
-    return { forecast24Hours };
+    displayHourlyForecast(forecast24Hours).setupHourlyForecast()
+    return forecast24Hours
   };
 
   const weeklyForecast = (mintemp, maxtemp, weatherType) => ({
@@ -90,6 +92,7 @@ const weather = (() => {
   };
   return { getCurrentWeather, getHourlyForecast, getWeeklyForecast };
 })();
+
 
 // eslint-disable-next-line import/prefer-default-export
 export { weather }
