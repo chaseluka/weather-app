@@ -7,6 +7,7 @@ async function getForecast(lat, lon) {
     { mode: 'cors' },
   );
   const forecastData = await data.json();
+  console.log(forecastData);
   weather.getHourlyForecast(forecastData)
 }
 

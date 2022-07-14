@@ -55,7 +55,7 @@ const weather = (() => {
     return { location };
   };
 
-  const hourlyForecast = (dt, tz, temp, weatherType) => ({ dt, tz, temp, weatherType });
+  const hourlyForecast = (dt, tz, temp, weatherType, weatherMain) => ({ dt, tz, temp, weatherType, weatherMain });
 
   const getHourlyForecast = (forecastData) => {
     const forecast24Hours = [];
@@ -65,6 +65,7 @@ const weather = (() => {
         forecastData.timezone_offset,
         forecastData.hourly[i].temp,
         forecastData.hourly[i].weather[0].description,
+        forecastData.hourly[i].weather[0].main,
       );
       forecast24Hours.push(hour);
     }
@@ -72,19 +73,19 @@ const weather = (() => {
     return forecast24Hours
   };
 
-  const weeklyForecast = (mintemp, maxtemp, weatherType) => ({
-    mintemp,
-    maxtemp,
+  const weeklyForecast = (temp, weatherType, weatherMain) => ({
+    temp,
     weatherType,
+    weatherMain,
   });
 
   const getWeeklyForecast = (forecastData) => {
     const forecast8Days = [];
     for (let i = 0; i < 8; i += 1) {
       const day = weeklyForecast(
-        forecastData.daily[i].temp.min,
-        forecastData.daily[i].temp.max,
+        forecastData.daily[i].temp.day,
         forecastData.daily[i].weather[0].description,
+        forecastData.daily[i].weather[0].main,
       );
       forecast8Days.push(day);
     }

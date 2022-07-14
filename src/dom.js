@@ -73,6 +73,19 @@ const displayHourlyForecast = (forecast) => {
     timeDiv.textContent = time + period;
   };
 
+  const addWeatherTypeImages = (forecastData, item) => {
+    const img = item.children[1]
+    const type = forecastData.weatherMain;
+    if (type === 'Clouds' || type === 'Rain' || type === 'Drizzle' || type === 'Thunderstorm' ||
+    type === 'Snow' || type === 'Clear'){
+      if (type === 'Clouds' && forecastData.weatherType !== 'overcast clouds') {
+        img.src = `../src/images/${forecastData.weatherType}.svg`;
+      } else if (forecastData.weatherType === 'overcast clouds') {
+        img.src = `../src/images/broken clouds.svg`;
+      } else img.src = `../src/images/${type}.svg`;
+    } else img.src = `../src/images/weather-tornado.svg`;
+  };
+
   const addHourlyTemp = (forecastData, item) => {
     const temp = tempConversion.toFahrenheit(forecastData.temp)
 
@@ -83,7 +96,8 @@ const displayHourlyForecast = (forecast) => {
   const setupHourlyForecast = () => {
     console.log(DOMElements.forecastItems);
     for (let i = 0; i < 25; i += 1){
-      addTime(forecast[i], DOMElements[i])
+      addTime(forecast[i], DOMElements[i]);
+      addWeatherTypeImages(forecast[i], DOMElements[i]);
       addHourlyTemp(forecast[i], DOMElements[i]);
     }
   }
