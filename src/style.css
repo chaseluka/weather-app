@@ -1,2 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans&display=swap');
 
+body {
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Albert Sans', sans-serif;
+  overflow-x: hidden;
+  background-color: #009afe;
+}
 
+.container {
+  height: fit-content;
+  width: 100%;
+  background-color: #009afe;
+}
+
+.header {
+  padding: 0 2%;
+  background-color: #444;
+  height: 80px;
+}
+
+.header,
+.logo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  margin-right: 6vw;
+}
+
+.logo {
+  gap: 0.5vmax;
+}
+
+.logo svg {
+  color: #e43414;
+}
+
+.logo-title {
+  color: #eee;
+  font-size: 25px;
+}
+
+input[type='search'] {
+  padding: min(0.8vw, 6px);
+  background-color: #eee;
+  appearance: none;
+  outline: none;
+  border: none;
+  width: clamp(100px, 15vw, 200px);
+  font-size: clamp(10px, 0.8vw, 13px);
+}
+
+input[type='submit'] {
+  background-image: url(../src/images/magnify.svg);
+  background-size: clamp(10px, 1.1vw, 20px);
+  background-repeat: no-repeat;
+  background-position: center;
+  width: clamp(20px, 4vw, 40px);
+  appearance: none;
+  outline: none;
+  border: none;
+  background-color: #e43414;
+}
+
+.si-unit {
+  display: flex;
+}
+
+.degrees {
+  background-color: #eee;
+  width: clamp(35px, 4.5vw, 45px);
+  text-align: center;
+  font-size: clamp(18px, 2vw, 22px);
+}
+
+.f {
+  background-color: #e43414;
+}
+
+.main {
+  display: grid;
+  grid-template: 1.5fr 1fr 1fr 0.6fr / 1fr;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: #009afe;
+  color: #eee;
+  gap: 10px;
+}
+
+.weather {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4vmax;
+  padding: 2%;
+}
+
+.high-low,
+.high-temp,
+.low-temp {
+  display: flex;
+}
+
+.high-low {
+  gap: 0.4vmax;
+}
+
+.weather-location {
+  font-size: clamp(20px, 3vmax, 35px);
+}
+
+.temp {
+  font-size: clamp(40px, 6vmax, 80px);
+}
+
+.weather-description,
+.high-low {
+  font-size: clamp(10px, 1.8vmax, 18px);
+}
+
+.forecast-container,
+.environment {
+  display: flex;
+  justify-content: center;
+}
+
+.forecast,
+.weekly,
+.environment-item {
+  display: flex;
+  flex-direction: column;
+  background-color: #347baa;
+  border-radius: 15px;
+  padding: max(10px, 1%);
+  gap: 0.5vmax;
+  width: min(80vw, 1250px);
+  height: fit-content;
+}
+
+.weekly,
+.environment-item {
+  width: fit-content;
+  height: fit-content;
+}
+
+.environment {
+  gap: 15px;
+}
+
+.hourly-forecast {
+  display: grid;
+  grid-template-rows: repeat(1, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(27px, 1fr));
+  justify-content: space-evenly;
+  grid-column-gap: 1.5vmax;
+  grid-row-gap: 1vmax;
+}
+
+.weekly-forecast {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 1.5vmax;
+}
+
+.forecast-title {
+  color: #eeeeeeaa;
+  font-size: clamp(6px, 1vw, 14px);
+}
+
+.environment-item .forecast-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+}
+
+.environment-info {
+  font-size: clamp(10px, 1.5vw, 20px);
+  text-align: center;
+}
+
+img {
+  height: 1vmax;
+  width: 1vmax;
+  filter: invert(100%) sepia(3%) saturate(43%) hue-rotate(233deg)
+    brightness(80%) contrast(77%);
+}
+
+.hourly-forecast-item,
+.weekly-forecast-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4vw;
+  font-size: clamp(10px, 1.8vw, 18px);
+}
+
+.hourly-forecast-item .time {
+  font-size: clamp(6px, 1.2vw, 14px);
+}
+
+@media screen and (max-width: 600px) {
+  .logo-title {
+    display: none;
+  }
+  form {
+    margin-right: 0;
+    margin-left: 6vw;
+  }
+}
