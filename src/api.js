@@ -11,9 +11,9 @@ async function getForecast(lat, lon) {
 }
 
 // Search for weather at a specific location. Then convert required data in an object.
-async function getWeather() {
+async function getWeather(search) {
   const data = await fetch(
-    `http://api.openweathermap.org/data/2.5/weather?q=${search.value}&APPID=a7f58f1e1cb17ffc0eec81a814f77ec2`,
+    `http://api.openweathermap.org/data/2.5/weather?q=${search}&APPID=a7f58f1e1cb17ffc0eec81a814f77ec2`,
     { mode: 'cors' },
   );
   const weatherData = await data.json();

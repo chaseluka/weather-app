@@ -43,12 +43,12 @@ const timeConversion = (dt, tz) => {
 const tempConversion = (() => {
   const toCelcius = (thisTemp) => {
     const temp = Math.round(thisTemp - 273.15);
-    return { temp }
+    return temp 
   }
 
   const toFahrenheit = (thisTemp) => {
     const temp = Math.round((9 / 5) * (thisTemp - 273.15) + 32);
-    return { temp };
+    return temp
   };
   return { toCelcius, toFahrenheit }
 })()

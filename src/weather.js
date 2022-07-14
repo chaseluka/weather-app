@@ -1,5 +1,4 @@
-
-
+import { mainWeather } from './dom'
 // Pass in openweathermap data and create an object for the specified location obtaining desired data for the current weather, the daily weather forecast, and the weekly weather forcast.
 const weather = (() => {
   const currentWeather = (
@@ -14,6 +13,9 @@ const weather = (() => {
     sunset,
     lat,
     lon,
+    location,
+    high,
+    low,
   ) => ({
     temp,
     feelsLike,
@@ -26,6 +28,9 @@ const weather = (() => {
     sunset,
     lat,
     lon,
+    location,
+    high,
+    low,
   });
 
   const getCurrentWeather = (weatherData) => {
@@ -41,7 +46,11 @@ const weather = (() => {
       weatherData.sys.sunset,
       weatherData.coord.lat,
       weatherData.coord.lon,
+      weatherData.name,
+      weatherData.main.temp_max,
+      weatherData.main.temp_min,
     );
+    mainWeather(location).loadPage();
     return { location };
   };
 
