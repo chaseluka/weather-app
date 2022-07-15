@@ -38,8 +38,14 @@ const timeConversion = (dt, tz) => {
   return { getHour, getHourAndMinute, getDay, timeIsAMOrPM}
 }
 
+let fahr = true;
+let cels = false 
+
 // Convert from Kelvins to either Celcius or Fahrenheit
 const tempConversion = (() => {
+  const fBtn = document.querySelector('.f');
+  const cBtn = document.querySelector('.c');
+  
   const toCelcius = (thisTemp) => {
     const temp = Math.round(thisTemp - 273.15);
     return temp 
@@ -49,7 +55,24 @@ const tempConversion = (() => {
     const temp = Math.round((9 / 5) * (thisTemp - 273.15) + 32);
     return temp
   };
-  return { toCelcius, toFahrenheit }
+
+  const values = () => ({ fahr, cels })
+
+  const switchMetric = () => {
+    if (fahr === true && cels === false) {
+      fahr = false;
+      cels = true;
+      cBtn.classList.add('selected');
+      fBtn.classList.remove('selected');
+    } else {
+      fahr = true;
+      cels = false;
+      fBtn.classList.add('selected');
+      cBtn.classList.remove('selected');
+    }
+  };
+
+  return { toCelcius, toFahrenheit, values, switchMetric }
 })()
 
 // Convert wind speed to mph and convert direction to cardinal direction.
