@@ -72,7 +72,13 @@ const tempConversion = (() => {
     }
   };
 
-  return { toCelcius, toFahrenheit, values, switchMetric }
+  const selectedMetric = (thisTemp) => {
+    if (fahr === true){
+      return toFahrenheit(thisTemp)
+    } return toCelcius(thisTemp)
+  }
+
+  return { toCelcius, toFahrenheit, values, switchMetric, selectedMetric }
 })()
 
 // Convert wind speed to mph and convert direction to cardinal direction.

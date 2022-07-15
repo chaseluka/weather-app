@@ -8,7 +8,7 @@ const mainWeather = (weatherData) => {
   }
   const changeMainTemp = () => {
     const tempDiv = document.querySelector('.temp')
-    const temp = tempConversion.toFahrenheit(weatherData.temp)
+    const temp = tempConversion.selectedMetric(weatherData.temp)
     tempDiv.textContent = `${temp}°`;
   }
 
@@ -19,13 +19,13 @@ const mainWeather = (weatherData) => {
 
   const changeHighTemp = () => {
     const tempDiv = document.querySelector('.high-temp-temp');
-    const temp = tempConversion.toFahrenheit(weatherData.high);
+    const temp = tempConversion.selectedMetric(weatherData.high);
     tempDiv.textContent = `${temp}°`;
   }
 
   const changeLowTemp = () => {
     const tempDiv = document.querySelector('.low-temp-temp');
-    const temp = tempConversion.toFahrenheit(weatherData.low);
+    const temp = tempConversion.selectedMetric(weatherData.low);
     tempDiv.textContent = `${temp}°`;
   };
 
@@ -114,7 +114,7 @@ const displayHourlyForecast = (forecast) => {
   };
 
   const addHourlyTemp = (forecastData, item) => {
-    const temp = tempConversion.toFahrenheit(forecastData.temp)
+    const temp = tempConversion.selectedMetric(forecastData.temp)
 
     const tempdiv = item.children[2];
     tempdiv.textContent = `${temp}°`
@@ -158,7 +158,7 @@ const displayWeeklyForecast = (forecast) => {
   };
 
   const addWeeklyTemp = (forecastData, item) => {
-    const temp = tempConversion.toFahrenheit(forecastData.temp);
+    const temp = tempConversion.selectedMetric(forecastData.temp);
 
     const tempdiv = item.children[2];
     tempdiv.textContent = `${temp}°`;
@@ -177,7 +177,7 @@ const displayWeeklyForecast = (forecast) => {
 const displayEnvironmentInfo = (weatherData) => {
   const feelsLike = () => {
     const temp = document.querySelector('.feels-like')
-    const thisTemp = tempConversion.toFahrenheit(weatherData.feelsLike);
+    const thisTemp = tempConversion.selectedMetric(weatherData.feelsLike);
     temp.textContent = `${thisTemp}°`
   }
   
