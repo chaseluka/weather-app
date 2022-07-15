@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Weather App</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../src/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="logo">
+          <svg style="width: 36px; height: 36px" viewBox="0 0 24 24">
+            <path
+              fill="currentColor"
+              d="M3.55 19.09L4.96 20.5L6.76 18.71L5.34 17.29M12 6C8.69 6 6 8.69 6 12S8.69 18 12 18 18 15.31 18 12C18 8.68 15.31 6 12 6M20 13H23V11H20M17.24 18.71L19.04 20.5L20.45 19.09L18.66 17.29M20.45 5L19.04 3.6L17.24 5.39L18.66 6.81M13 1H11V4H13M6.76 5.39L4.96 3.6L3.55 5L5.34 6.81L6.76 5.39M1 13H4V11H1M13 20H11V23H13"
+            />
+          </svg>
+          <div class="logo-title">Weather App</div>
+        </div>
+        <div class="search-bar">
+          <form id="location">
+            <label for="search"></label>
+            <input
+              type="search"
+              id="search"
+              name="search"
+              placeholder="Search Location"
+            /><input
+              type="submit"
+              src="../src/images/magnify.svg"
+              alt="Search"
+              value=""
+            />
+          </form>
+          <div class="error">*Location not found. Please input a new city</div>
+        </div>
+          
+        <div class="si-unit">
+          <div class="f selected">F°</div>
+          <div class="c">C°</div>
+        </div>
+      </div>
+      <div class="main">
+        <div class="weather">
+          <div class="weather-location">Missoula</div>
+          <div class="temp">70°</div>
+          <div class="weather-description">Cloudy</div>
+          <div class="high-low">
+            <div class="high-temp">
+              <div class="indicator">H:</div>
+              <div class="high-temp-temp">90°</div>
+            </div>
+            <div class="low-temp">
+              <div class="indicator">L:</div>
+              <div class="low-temp-temp">60°</div>
+            </div>
+          </div>
+        </div>
+        <div class="forecast-container">
+          <div class="forecast">
+            <div class="forecast-title">Hourly Forecast</div>
+            <div class="hourly-forecast"></div>
+          </div>
+        </div>
+        <div class="forecast-container">
+          <div class="weekly">
+            <div class="forecast-title">8-Day Forecast</div>
+            <div class="weekly-forecast"></div>
+          </div>
+        </div>
+        <div class="environment">
+          <div class="environment-item">
+            <div class="forecast-title">
+              <img src="../src/images/thermometer-lines.svg">
+              <div class="environment-title">Feels Like</div>
+            </div>
+            <div class="environment-info feels-like">75°</div>
+          </div>
+          <div class="environment-item">
+            <div class="forecast-title">
+              <img src="../src/images/water-percent.svg">
+              <div class="environment-title">Humididty</div>
+            </div>
+            <div class="environment-info humididty">75%</div>
+          </div>
+          <div class="environment-item">
+            <div class="forecast-title">
+              <img src="../src/images/weather-windy.svg">
+              <div class="environment-title">Wind</div>
+            </div>
+            <div class="environment-info wind">6mph/NE</div>
+          </div>
+          <div class="environment-item">
+            <div class="forecast-title">
+              <img src="../src/images/eye.svg">
+              <div class="environment-title">Visability</div>
+            </div>
+            <div class="environment-info visibility">10mi</div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
