@@ -1,6 +1,6 @@
 import { tempConversion, timeConversion, windConversion } from './convert'
 
-
+// Change DOM items for  main weather
 const mainWeather = (weatherData) => {
   const changeLocation = () => {
     const location = document.querySelector('.weather-location')
@@ -39,6 +39,7 @@ const mainWeather = (weatherData) => {
   return{ loadPage }
 }
 
+// Create DOM elements for hourly forecast items, to recycle.
 const createDOMElements = (() => {
   const hourlyForecastDOMElements = (() => {
     const hourlyForecastContainer = document.querySelector('.hourly-forecast');
@@ -90,6 +91,8 @@ const createDOMElements = (() => {
   return { hourlyForecastDOMElements, weeklyForecastDOMElements }
 
 })(); 
+
+// Change DOM items for hourly forecast
 const displayHourlyForecast = (forecast) => {
   const addTime = (forecastData, item) => {
     const time = timeConversion(forecastData.dt, forecastData.tz).getHour();
@@ -130,7 +133,7 @@ const displayHourlyForecast = (forecast) => {
 
   return { setupHourlyForecast }
 }
-
+// Change DOM items for weekly forecast
 const displayWeeklyForecast = (forecast) => {
   const addTime = (forecastData, item) => {
     const time = timeConversion(forecastData.dt, forecastData.tz).getDay();
@@ -174,6 +177,7 @@ const displayWeeklyForecast = (forecast) => {
   return { setupWeeklyForecast };
 };
 
+// Change DOM items for environmental information
 const displayEnvironmentInfo = (weatherData) => {
   const feelsLike = () => {
     const temp = document.querySelector('.feels-like')

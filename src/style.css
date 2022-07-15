@@ -28,9 +28,20 @@ body {
   align-items: center;
 }
 
+.seearch-bar {
+  margin-right: 6vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.error {
+  font-size: clamp(10px, 0.8vw, 13px);
+  color: red;
+  display: none;
+}
+
 form {
   display: flex;
-  margin-right: 6vw;
 }
 
 .logo {
@@ -228,7 +239,7 @@ input[type='submit'] {
   .logo-title {
     display: none;
   }
-  form {
+  .seearch-bar {
     margin-right: 0;
     margin-left: 6vw;
   }

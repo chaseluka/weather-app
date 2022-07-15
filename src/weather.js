@@ -50,6 +50,7 @@ const weather = (() => {
       weatherData.dt,
       weatherData.timezone,
     );
+    // call neccessary DOM info
     mainWeather(location).loadPage();
     displayEnvironmentInfo(location).setupEnvironmentInfo()
     return { location };
@@ -69,10 +70,9 @@ const weather = (() => {
       );
       forecast24Hours.push(hour);
     }
-    displayHourlyForecast(forecast24Hours).setupHourlyForecast()
+    // call neccessary DOM info
     displayHourlyForecast(forecast24Hours).setupHourlyForecast();
-    displayHourlyForecast(forecast24Hours).setupHourlyForecast();
-    return forecast24Hours
+    return forecast24Hours;
   };
 
   const weeklyForecast = (dt, tz, temp, weatherType, weatherMain) => ({
@@ -95,8 +95,9 @@ const weather = (() => {
       );
       forecast8Days.push(day);
     }
+    // call neccessary DOM info
     displayWeeklyForecast(forecast8Days).setupWeeklyForecast();
-    return forecast8Days
+    return forecast8Days;
   };
   return { getCurrentWeather, getHourlyForecast, getWeeklyForecast };
 })();

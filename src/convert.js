@@ -38,7 +38,7 @@ const timeConversion = (dt, tz) => {
   return { getHour, getHourAndMinute, getDay, timeIsAMOrPM}
 }
 
-let fahr = true;
+let fahr = true; // global values for changing which metric is selected
 let cels = false 
 
 // Convert from Kelvins to either Celcius or Fahrenheit
@@ -56,9 +56,9 @@ const tempConversion = (() => {
     return temp
   };
 
-  const values = () => ({ fahr, cels })
+  const values = () => ({ fahr, cels }) // to use for referencing which metric is selected
 
-  const switchMetric = () => {
+  const switchMetric = () => { // Allow toggling of metric
     if (fahr === true && cels === false) {
       fahr = false;
       cels = true;
@@ -72,7 +72,7 @@ const tempConversion = (() => {
     }
   };
 
-  const selectedMetric = (thisTemp) => {
+  const selectedMetric = (thisTemp) => { // return the temp according to the seleceted metric
     if (fahr === true){
       return toFahrenheit(thisTemp)
     } return toCelcius(thisTemp)
