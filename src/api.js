@@ -9,6 +9,7 @@ async function getForecast(lat, lon) {
   const forecastData = await data.json();
   console.log(forecastData);
   weather.getHourlyForecast(forecastData)
+  weather.getWeeklyForecast(forecastData)
 }
 
 // Search for weather at a specific location. Then convert required data in an object.

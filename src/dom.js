@@ -1,4 +1,4 @@
-import { tempConversion, timeConversion } from './convert'
+import { tempConversion, timeConversion, windConversion } from './convert'
 
 
 const mainWeather = (weatherData) => {
@@ -39,8 +39,8 @@ const mainWeather = (weatherData) => {
   return{ loadPage }
 }
 
-const displayHourlyForecast = (forecast) => {
-  const DOMElements = (() => {
+const createDOMElements = (() => {
+  const hourlyForecastDOMElements = (() => {
     const hourlyForecastContainer = document.querySelector('.hourly-forecast');
 
     for (let i = 0; i < 25; i += 1) {
@@ -52,18 +52,45 @@ const displayHourlyForecast = (forecast) => {
       timeDiv.classList.add('time');
 
       const img = document.createElement('img');
-      
-      const tempDiv = document.createElement('div');
-      tempDiv.classList.add('hourly-temp')
 
-      hourlyForecastItem.appendChild(timeDiv)
-      hourlyForecastItem.appendChild(img)
-      hourlyForecastItem.appendChild(tempDiv)
+      const tempDiv = document.createElement('div');
+      tempDiv.classList.add('hourly-temp');
+
+      hourlyForecastItem.appendChild(timeDiv);
+      hourlyForecastItem.appendChild(img);
+      hourlyForecastItem.appendChild(tempDiv);
     }
-    const forecastItems = document.querySelectorAll('.hourly-forecast-item')
-    return forecastItems
+    const forecastItems = document.querySelectorAll('.hourly-forecast-item');
+    return forecastItems;
+  })();
+ 
+  const weeklyForecastDOMElements = (() => {
+    const weeklyForecastContainer = document.querySelector('.weekly-forecast');
+    for (let i = 0; i < 8; i += 1) {
+      const weeklyForecastItem = document.createElement('div');
+      weeklyForecastItem.classList.add('weekly-forecast-item');
+      weeklyForecastContainer.appendChild(weeklyForecastItem);
+
+      const timeDiv = document.createElement('div');
+      timeDiv.classList.add('time');
+
+      const img = document.createElement('img');
+
+      const tempDiv = document.createElement('div');
+      tempDiv.classList.add('weekly-temp');
+
+      weeklyForecastItem.appendChild(timeDiv);
+      weeklyForecastItem.appendChild(img);
+      weeklyForecastItem.appendChild(tempDiv);
+    }
+    const forecastItems = document.querySelectorAll('.weekly-forecast-item');
+    return forecastItems;
   })();
 
+  return { hourlyForecastDOMElements, weeklyForecastDOMElements }
+
+})(); 
+const displayHourlyForecast = (forecast) => {
   const addTime = (forecastData, item) => {
     const time = timeConversion(forecastData.dt, forecastData.tz).getHour();
     const period = timeConversion(forecastData.dt, forecastData.tz).timeIsAMOrPM();
@@ -94,15 +121,89 @@ const displayHourlyForecast = (forecast) => {
   }
 
   const setupHourlyForecast = () => {
-    console.log(DOMElements.forecastItems);
     for (let i = 0; i < 25; i += 1){
-      addTime(forecast[i], DOMElements[i]);
-      addWeatherTypeImages(forecast[i], DOMElements[i]);
-      addHourlyTemp(forecast[i], DOMElements[i]);
+      addTime(forecast[i], createDOMElements.hourlyForecastDOMElements[i]);
+      addWeatherTypeImages(forecast[i], createDOMElements.hourlyForecastDOMElements[i]);
+      addHourlyTemp(forecast[i], createDOMElements.hourlyForecastDOMElements[i]);
     }
   }
 
   return { setupHourlyForecast }
 }
 
-export { mainWeather, displayHourlyForecast }
+const displayWeeklyForecast = (forecast) => {
+  const addTime = (forecastData, item) => {
+    const time = timeConversion(forecastData.dt, forecastData.tz).getDay();
+    const timeDiv = item.children[0];
+    timeDiv.textContent = time
+  };
+
+  const addWeatherTypeImages = (forecastData, item) => {
+    const img = item.children[1];
+    const type = forecastData.weatherMain;
+    if (
+      type === 'Clouds' ||
+      type === 'Rain' ||
+      type === 'Drizzle' ||
+      type === 'Thunderstorm' ||
+      type === 'Snow' ||
+      type === 'Clear'
+    ) {
+      if (type === 'Clouds' && forecastData.weatherType !== 'overcast clouds') {
+        img.src = `../src/images/${forecastData.weatherType}.svg`;
+      } else if (forecastData.weatherType === 'overcast clouds') {
+        img.src = `../src/images/broken clouds.svg`;
+      } else img.src = `../src/images/${type}.svg`;
+    } else img.src = `../src/images/weather-tornado.svg`;
+  };
+
+  const addWeeklyTemp = (forecastData, item) => {
+    const temp = tempConversion.toFahrenheit(forecastData.temp);
+
+    const tempdiv = item.children[2];
+    tempdiv.textContent = `${temp}°`;
+  };
+
+  const setupWeeklyForecast = () => {
+    for (let i = 0; i < 8; i += 1) {
+      addTime(forecast[i], createDOMElements.weeklyForecastDOMElements[i]);
+      addWeatherTypeImages(forecast[i], createDOMElements.weeklyForecastDOMElements[i]);
+      addWeeklyTemp(forecast[i], createDOMElements.weeklyForecastDOMElements[i]);
+    }
+  };
+  return { setupWeeklyForecast };
+};
+
+const displayEnvironmentInfo = (weatherData) => {
+  const feelsLike = () => {
+    const temp = document.querySelector('.feels-like')
+    const thisTemp = tempConversion.toFahrenheit(weatherData.feelsLike);
+    temp.textContent = `${thisTemp}°`
+  }
+  
+  const humidity = () => {
+    const humd = document.querySelector('.humididty');
+    humd.textContent = `${weatherData.humidity}%`;
+  };
+
+  const wind = () => {
+    const windInfo = document.querySelector('.wind');
+    windInfo.textContent = `${windConversion.speed(weatherData.windSpeed)}mph/${windConversion.direction(weatherData.windDeg)}`;
+  };
+
+  const visibility = () => {
+    const vis = document.querySelector('.visibility');
+    const text = Math.round(weatherData.visibility / 1000)
+    vis.textContent = `${text}mi`;
+  }
+
+  const setupEnvironmentInfo = () => {
+    feelsLike()
+    humidity()
+    visibility()
+    wind()
+  }
+  return { setupEnvironmentInfo }
+}
+
+export { mainWeather, displayHourlyForecast, displayWeeklyForecast, displayEnvironmentInfo }

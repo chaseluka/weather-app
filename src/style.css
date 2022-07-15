@@ -72,15 +72,22 @@ input[type='submit'] {
   display: flex;
 }
 
-.degrees {
+.f,
+.c {
   background-color: #eee;
   width: clamp(35px, 4.5vw, 45px);
   text-align: center;
   font-size: clamp(18px, 2vw, 22px);
 }
 
-.f {
+.selected {
   background-color: #e43414;
+  border: 1px solid #000;
+}
+
+.f:hover,
+.c:hover {
+  transform: scale(1.05);
 }
 
 .main {
@@ -130,6 +137,14 @@ input[type='submit'] {
 .environment {
   display: flex;
   justify-content: center;
+}
+
+.hourly-forecast-item img,
+.weekly-forecast-item img {
+  filter: invert(99%) sepia(2%) saturate(525%) hue-rotate(195deg)
+    brightness(113%) contrast(87%);
+  height: max(2vmax, 20px);
+  width: max(2vmax, 20px);
 }
 
 .forecast,

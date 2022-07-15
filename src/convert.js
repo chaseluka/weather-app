@@ -17,8 +17,7 @@ const timeConversion = (dt, tz) => {
 
   const getHourAndMinute = () => {
     const minute = date.slice(20, 22)
-    const hourAndMinute = `${getHour().hour  }:${  minute}`;
-
+    const hourAndMinute = `${getHour()  }:${  minute}`;
     return hourAndMinute
   }
 
@@ -57,7 +56,7 @@ const tempConversion = (() => {
 const windConversion = (() => {
   const speed = (windSpeed) => {
     const mph = Math.round(windSpeed * 2.236936);
-    return { mph }
+    return mph
   }
 
   const direction = (windDeg) => {
@@ -77,7 +76,7 @@ const windConversion = (() => {
     } else if (windDeg > 281.25 && windDeg < 326.25) {
       thisDirection = 'NW';
     } else thisDirection = 'N'
-    return { thisDirection }
+    return thisDirection
   }
   return { speed, direction }
 })()
